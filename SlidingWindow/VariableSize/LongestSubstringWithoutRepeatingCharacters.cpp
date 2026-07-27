@@ -4,26 +4,30 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
 int longestSubstringWithoutRepeatingCharacters(string s) {
     int start=0;
-    int maxlen=INT_MIN;
+    int maxlen=0;
+    int len=0;
     unordered_map<char,int>visited;
     for(int end=0;end<s.length();end++){
-        visited[s[end]]++;
-        if(visited[s[end]]>1){
-            while(visited[s[end]]>1){
-                visited[s[start]]--;
-                start++;
-            }
+        if(visited[s[end]]==0){          // check BEFORE marking
+            len++;
+            visited[s[end]]=1;
+            maxlen=max(maxlen,len);
         }
         else{
-            maxlen=max(maxlen,end-start+1);
+            while(visited[s[end]]!=0){
+                visited[s[start]]--;
+                start++;
+                len--;                    // shrink len as window shrinks
+            }
+            len++;
+            visited[s[end]]=1;
+            maxlen=max(maxlen,len);
         }
     }
     return maxlen;
 }
-
 int main(){
     string s="abcabcbb";
     cout<<longestSubstringWithoutRepeatingCharacters(s);
