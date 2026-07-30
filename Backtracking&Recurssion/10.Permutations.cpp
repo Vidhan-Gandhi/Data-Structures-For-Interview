@@ -1,3 +1,7 @@
+// C++ program to print all permutations with duplicates allowed
+// You are given an array of integers that may contain duplicates. You need to print all possible permutations of the array, ensuring that each permutation is unique (i.e., no duplicate permutations should be printed).
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
